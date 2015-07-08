@@ -70,10 +70,9 @@ int main(int argc, char *argv[])
                 /* Attempt to parse the user input */
                 mpc_result_t r;
                 if (mpc_parse("<stdin>", input, Lispy, &r)) {
+                        /* On success eval and delete the AST */
 #ifdef DEBUG
-                        /* On success print and delete the AST */
                         mpc_ast_print(r.output);
-                        mpc_ast_delete(r.output);
 #endif
                         long result = eval(r.output);
                         printf("%li\n", result);
