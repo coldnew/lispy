@@ -1,0 +1,14 @@
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_BUILD_DIR}
+  ${Readline_INCLUDE_DIR})
+
+set(SOURCE
+  main.c)
+
+ADD_EXECUTABLE(minilisp ${SOURCE})
+TARGET_LINK_LIBRARIES(minilisp
+  ${Readline_LIBRARY})
+install(
+  TARGETS minilisp
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
