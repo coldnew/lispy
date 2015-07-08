@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-PROJECT(minilisp)
+PROJECT(lispy)
 
 # Set version
 set(VERSION_MAJOR "0")

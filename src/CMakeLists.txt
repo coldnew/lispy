@@ -11,10 +11,10 @@ set(SOURCE
   main.c
   ${CMAKE_SOURCE_DIR}/3rdparty/mpc/mpc.c)
 
-ADD_EXECUTABLE(minilisp ${SOURCE})
-TARGET_LINK_LIBRARIES(minilisp
+ADD_EXECUTABLE(lispy ${SOURCE})
+TARGET_LINK_LIBRARIES(lispy
   ${Readline_LIBRARY})
 
 install(
-  TARGETS minilisp
+  TARGETS lispy
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

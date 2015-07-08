@@ -10,7 +10,7 @@ const char *version = "0.0.1";
 
 int main(int argc, char *argv[])
 {
-        printf("MiniLisp - v%s ", version);
+        printf("Lispy - v%s ", version);
         printf("Press Ctrl-c to exit\n");
 
         /* Create Some Parsers */
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
                   ", Number, Operator, Expr, Lispy);
 
         while (1) {
-                char *input = readline("lisp> ");
+                char *input = readline("Lispy> ");
                 add_history(input);
 
                 /* Attempt to parse the user input */
