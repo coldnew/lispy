@@ -8,6 +8,6 @@ set(VERSION_PATCH "1")
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 include(GNUInstallDirs)
-include(cmake)
+include(cmake/FindReadline.cmake)
 
 ADD_SUBDIRECTORY(src)
