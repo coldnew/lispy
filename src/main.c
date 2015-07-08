@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -7,6 +8,40 @@
 #include "mpc.h"
 
 const char *version = "0.0.1";
+
+/* Use operator string to see which operation to perform */
+long eval_op(long x, char *op, long y)
+{
+        if (strcmp(op, "+") == 0) { return x + y; }
+        if (strcmp(op, "-") == 0) { return x - y; }
+        if (strcmp(op, "*") == 0) { return x * y; }
+        if (strcmp(op, "/") == 0) { return x / y; }
+
+        return 0;
+}
+
+long eval(mpc_ast_t *t)
+{
+        /* If tagged as number return it directly. */
+        if (strstr(t->tag, "number")) {
+                return atoi(t->contents);
+        }
+
+        /* The operator is always second child. */
+        char *op = t->children[1]->contents;
+
+        /* We store the third child in `x` */
+        long x = eval(t->children[2]);
+
+        /* Iterate the remaining children and combining. */
+        int i = 3;
+        while(strstr(t->children[i]->tag, "expr")) {
+                x = eval_op(x, op, eval(t->children[i]));
+                i++;
+        }
+
+        return x;
+}
 
 int main(int argc, char *argv[])
 {
@@ -35,8 +70,13 @@ int main(int argc, char *argv[])
                 /* Attempt to parse the user input */
                 mpc_result_t r;
                 if (mpc_parse("<stdin>", input, Lispy, &r)) {
+#ifdef DEBUG
                         /* On success print and delete the AST */
                         mpc_ast_print(r.output);
+                        mpc_ast_delete(r.output);
+#endif
+                        long result = eval(r.output);
+                        printf("%li\n", result);
                         mpc_ast_delete(r.output);
                 } else {
                         /* Otherwise print and delete the Error */
