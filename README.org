@@ -1,0 +1,24 @@
+#+TITLE: Lispy - A simple lisp implement in C
+
+This lisp is what I learn from [[https://www.buildyourownlisp.com][Build your own Lisp]], which is a great C language
+tutorial.
+
+* Dependancy
+
+This application depends on =readline=, you must install it for compile this application.
+
+: apt-get install libreadline6-dev
+
+* Build and Run
+
+Use =cmake= to build this application
+
+#+BEGIN_EXAMPLE
+  mkdir build && cd $_
+  cmake ..
+  make
+#+END_EXAMPLE
+
+You will find =lispy= binary in =src= folder, just execute it.
+
+: ./lispy
